@@ -15,6 +15,37 @@ header {
   height: 23px;
   background: #DCDCDC;
 }
+#kill {
+  margin-left: 200px;
+  color: darkred;
+  cursor: pointer;
+}
+#killed {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+  padding: 50px;
+  background: #DCDCDC;
+}
+#new {
+  position: relative;
+  display: block;
+  margin-left: 50px;
+  padding: 4px 0px;
+  width: 100px;
+  background: #F0F0F0;
+  text-align: center;
+  cursor: pointer;
+}
+.killed * {
+  display: none;
+}
+.killed #killed, .killed #killed * {
+  display: block;
+}
 #editor {
   position: absolute;
   top: 23px;

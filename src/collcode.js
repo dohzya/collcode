@@ -37,6 +37,15 @@ var Firepad = require('./firepad');
     return ref;
   }
 
+  function kill(ctx) {
+    ctx.firebase.remove();
+    window.location.hash = "";
+    document.querySelector('body').classList.add('killed');
+    document.querySelector('#new').addEventListener('click', function () {
+      window.location.reload();
+    });
+  }
+
   function changeKeybinding(ctx, keybinding) {
     var handler;
     if (keybinding == 'ace') {
@@ -87,6 +96,10 @@ var Firepad = require('./firepad');
     ctx.optsTheme = opts.querySelector('[name="theme"]');
     ctx.optsTheme.addEventListener('change', function () {
       changeTheme(ctx, ctx.optsTheme.value);
+    });
+
+    document.querySelector('#kill').addEventListener('click', function () {
+      kill(ctx);
     });
 
     ctx.firebase = autoRefFromHash();
