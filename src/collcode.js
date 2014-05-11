@@ -37,13 +37,26 @@ var Firepad = require('./firepad');
     return ref;
   }
 
-  function kill(ctx) {
-    ctx.firebase.remove();
-    window.location.hash = "";
-    document.querySelector('body').classList.add('killed');
-    document.querySelector('#new').addEventListener('click', function () {
-      window.location.reload();
-    });
+  function kill(ctx, notified) {
+    if (notified) {  // we receive the notif
+      window.location.hash = "";
+      document.querySelector('body').className = 'killed';
+      if (ctx.sente) {  // we receive the notif because we kill
+        ctx.killed = true;
+        ctx.firebase.remove();  // remove it asap from server
+      }
+    } else {  // we kill
+      ctx.sente = true;
+      document.querySelector('body').className = 'killing';
+      ctx.firebase.update({kill: true});
+      setTimeout(function () {
+        if (!ctx.killed) {  // we didn't receive the notif from our kill
+          ctx.firebase.remove();
+          window.location.hash = "";
+          document.querySelector('body').className = 'killed';
+        }
+      }, 2000);
+    }
   }
 
   function changeKeybinding(ctx, keybinding) {
@@ -102,6 +115,10 @@ var Firepad = require('./firepad');
       kill(ctx);
     });
 
+    document.querySelector('#new').addEventListener('click', function () {
+      window.location = window.location.toString().replace(/#.*/, '');
+    });
+
     ctx.firebase = autoRefFromHash();
     ctx.editor = ace.edit("editor");
     ctx.defaultKeyboardHandler = ctx.editor.getKeyboardHandler();
@@ -117,7 +134,11 @@ var Firepad = require('./firepad');
     ctx.firebase.on('value', function(snapshot) {
       var message = snapshot.val();
       received = true;
-      if (message.mode) {
+      if (!message) {
+        // do nothing
+      } else if (message.kill) {
+        kill(ctx, true);
+      } else if (message.mode) {
         changeMode(ctx, message.mode);
       }
     });

@@ -9,8 +9,7 @@ header {
   top: 0;
   right: 0;
   left: 0;
-  z-index: 10;
-  padding-top: 2px;
+  z-index: 2;
   padding-left: 5px;
   height: 23px;
   background: #DCDCDC;
@@ -20,15 +19,21 @@ header {
   color: darkred;
   cursor: pointer;
 }
-#killed {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+#killing {
+  position: relative;
+  z-index: 4;
   display: none;
-  padding: 50px;
-  background: #DCDCDC;
+  margin: 100px auto;
+  width: 300px;
+  height: 100px;
+}
+#killed {
+  position: relative;
+  z-index: 4;
+  display: none;
+  margin: 100px auto;
+  width: 300px;
+  height: 100px;
 }
 #new {
   position: relative;
@@ -37,14 +42,34 @@ header {
   padding: 4px 0px;
   width: 100px;
   background: #F0F0F0;
+  color: black;
   text-align: center;
   cursor: pointer;
 }
-.killed * {
+#backdrop {
+  z-index: 3;
   display: none;
+  background: rgb(120, 120, 120);
+  background: rgba(120, 120, 120, 0.6);
+  color: white;
 }
-.killed #killed, .killed #killed * {
+.killed #backdrop, .killing #backdrop {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   display: block;
+  display: block;
+}
+.killing #killing {
+  display: block;
+}
+.killed #killed {
+  display: block;
+}
+.firepad {
+  z-index: 1;
 }
 #editor {
   position: absolute;
