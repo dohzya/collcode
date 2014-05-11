@@ -28,13 +28,16 @@ var Firepad = require('./firepad');
     // Get hash from end of URL or generate a random one.
     var ref = new Firebase('https://code-dohzya.firebaseIO.com');
     var hash = window.location.hash.replace(/#/g, '');
+    var creator;
     if (hash) {
       ref = ref.child(hash);
+      creator = false;
     } else {
       ref = ref.push(); // generate unique location.
+      creator = true;
       window.location = window.location + '#' + ref.name(); // add it as a hash to the URL.
     }
-    return ref;
+    return [ref, creator];
   }
 
   function kill(ctx, notified) {
@@ -119,7 +122,10 @@ var Firepad = require('./firepad');
       window.location = window.location.toString().replace(/#.*/, '');
     });
 
-    ctx.firebase = autoRefFromHash();
+    var autoRef = autoRefFromHash();
+    ctx.firebase = autoRef[0];
+    ctx.creator = autoRef[1];
+
     ctx.editor = ace.edit("editor");
     ctx.defaultKeyboardHandler = ctx.editor.getKeyboardHandler();
     var theme = sessionStorage.getItem("theme") || 'ambiance';
@@ -152,6 +158,12 @@ var Firepad = require('./firepad');
     }, 5000);
 
     ctx.firepad = Firepad.fromACE(ctx.firebase, ctx.editor);
+
+    window.onbeforeunload = function () {
+      if (ctx.creator && !ctx.killed) {
+        return "You haven't kill the buffer";
+      }
+    };
 
   }
 
