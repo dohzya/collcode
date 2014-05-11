@@ -1,0 +1,27 @@
+html { height: 100%; }
+body { position: relative; margin: 0; height: 100%; }
+
+.fullscreen header {
+  display: none;
+}
+header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  padding-top: 2px;
+  padding-left: 5px;
+  height: 23px;
+  background: #DCDCDC;
+}
+#editor {
+  position: absolute;
+  top: 23px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.fullscreen #editor {
+  top: 0;
+}
