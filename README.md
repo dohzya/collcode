@@ -12,8 +12,7 @@ L'éditeur est [Ace](http://ace.c9.io) et la partie collaboration est gérée pa
 Utilisation
 -----------
 
-La page [https://code.dohzya.com](https://code.dohzya.com) va créer si besoin
-un nouveau document Firepad.
+La page va créer si besoin un nouveau document Firepad.
 
 Pour partager un document avec quelqu'un, il suffit de lui donner l'URL de la
 page.
