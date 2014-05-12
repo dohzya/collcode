@@ -19,6 +19,9 @@ header {
   color: darkred;
   cursor: pointer;
 }
+#kill:hover {
+  color: red;
+}
 #killing {
   position: relative;
   z-index: 4;
