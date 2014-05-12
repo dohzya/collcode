@@ -12,17 +12,17 @@ header {
   z-index: 2;
   padding-left: 5px;
   height: 23px;
-  background: #DCDCDC;
+  background: #cc-DCDCDC;
 }
-#kill {
+#cc-kill {
   margin-left: 200px;
   color: darkred;
   cursor: pointer;
 }
-#kill:hover {
+#cc-kill:hover {
   color: red;
 }
-#killing {
+#cc-killing {
   position: relative;
   z-index: 4;
   display: none;
@@ -30,7 +30,7 @@ header {
   width: 300px;
   height: 100px;
 }
-#killed {
+#cc-killed {
   position: relative;
   z-index: 4;
   display: none;
@@ -38,28 +38,28 @@ header {
   width: 300px;
   height: 100px;
 }
-#new {
+#cc-new {
   position: relative;
   display: block;
   margin-left: 50px;
   padding: 4px 0px;
   width: 100px;
-  background: #F0F0F0;
+  background: #cc-F0F0F0;
   color: black;
   text-align: center;
   cursor: pointer;
 }
-#new:hover {
-  background: #E0E0E0;
+#cc-new:hover {
+  background: #cc-E0E0E0;
 }
-#backdrop {
+#cc-backdrop {
   z-index: 3;
   display: none;
   background: rgb(120, 120, 120);
   background: rgba(120, 120, 120, 0.6);
   color: white;
 }
-.killed #backdrop, .killing #backdrop {
+.killed #cc-backdrop, .killing #cc-backdrop {
   position: absolute;
   top: 0;
   right: 0;
@@ -68,29 +68,29 @@ header {
   display: block;
   display: block;
 }
-.killing #killing {
+.killing #cc-killing {
   display: block;
 }
-.killed #killed {
+.killed #cc-killed {
   display: block;
 }
 .firepad {
   z-index: 1;
 }
-#editor {
+#cc-editor {
   position: absolute;
   top: 23px;
   right: 0;
   bottom: 0;
   left: 0;
 }
-.preview #editor {
+.preview #cc-editor {
   right: 50%;
 }
-#side {
+#cc-side {
   display: none;
 }
-.preview #side {
+.preview #cc-side {
   display: block;
   position: absolute;
   top: 23px;

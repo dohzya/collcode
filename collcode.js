@@ -10147,7 +10147,7 @@ var Firepad = require('./firepad');
   function init() {
     var ctx = Collcode;
 
-    var opts = document.querySelector('#options');
+    var opts = document.querySelector('#cc-options');
     ctx.optsKeybinding = opts.querySelector('[name="keybinding"]');
     ctx.optsKeybinding.addEventListener('change', function () {
       changeKeybinding(ctx, ctx.optsKeybinding.value);
@@ -10163,24 +10163,24 @@ var Firepad = require('./firepad');
       changeTheme(ctx, ctx.optsTheme.value);
     });
 
-    document.querySelector('#kill').addEventListener('click', function () {
+    document.querySelector('#cc-kill').addEventListener('click', function () {
       if (window.confirm("Do you really to kill the doc?\n(it will be destroyed for everyone)")) {
         kill(ctx);
       }
     });
 
-    document.querySelector('#new').addEventListener('click', function () {
+    document.querySelector('#cc-new').addEventListener('click', function () {
       window.location = window.location.toString().replace(/#.*/, '');
     });
 
-    ctx.preview = document.querySelector('#preview');
+    ctx.preview = document.querySelector('#cc-preview');
     ctx.showPreview = false;
 
     var autoRef = autoRefFromHash();
     ctx.firebase = autoRef[0];
     ctx.creator = autoRef[1];
 
-    ctx.editor = ace.edit("editor");
+    ctx.editor = ace.edit("cc-editor");
     ctx.defaultKeyboardHandler = ctx.editor.getKeyboardHandler();
     var theme = sessionStorage.getItem("theme") || 'ambiance';
     changeTheme(ctx, theme);
