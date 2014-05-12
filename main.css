@@ -84,6 +84,18 @@ header {
   bottom: 0;
   left: 0;
 }
-.fullscreen #editor {
-  top: 0;
+.preview #editor {
+  right: 50%;
+}
+#side {
+  display: none;
+}
+.preview #side {
+  display: block;
+  position: absolute;
+  top: 23px;
+  right: 0;
+  bottom: 0;
+  left: 50%;
+  overflow: auto;
 }

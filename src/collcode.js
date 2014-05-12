@@ -79,10 +79,26 @@ var Firepad = require('./firepad');
     ctx.firebase.update({mode: ctx.mode});
   }
 
+  function preview(ctx) {
+    var value = ctx.editor.getValue();
+    ctx.preview.innerHTML = marked(value);
+  }
+
+  function showPreview(ctx, show) {
+    ctx.showPreview = show;
+    if (show) {
+      preview(ctx);
+      document.querySelector('body').classList.add('preview');
+    } else {
+      document.querySelector('body').classList.remove('preview');
+    }
+  }
+
   function changeMode(ctx, mode, notify) {
     ctx.session.setMode("ace/mode/"+mode);
     ctx.mode = mode;
     ctx.optsMode.value = ctx.mode;
+    showPreview(ctx, mode == 'markdown');
     if (notify) {
       notifyMode(ctx);
     }
@@ -122,6 +138,9 @@ var Firepad = require('./firepad');
       window.location = window.location.toString().replace(/#.*/, '');
     });
 
+    ctx.preview = document.querySelector('#preview');
+    ctx.showPreview = false;
+
     var autoRef = autoRefFromHash();
     ctx.firebase = autoRef[0];
     ctx.creator = autoRef[1];
@@ -158,6 +177,12 @@ var Firepad = require('./firepad');
     }, 5000);
 
     ctx.firepad = Firepad.fromACE(ctx.firebase, ctx.editor);
+
+    ctx.editor.on("change", function (evt, editor) {
+      if (ctx.showPreview) {
+        preview(ctx);
+      }
+    });
 
     window.onbeforeunload = function () {
       if (ctx.creator && !ctx.killed) {
