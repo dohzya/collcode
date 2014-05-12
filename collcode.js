@@ -10164,7 +10164,9 @@ var Firepad = require('./firepad');
     });
 
     document.querySelector('#kill').addEventListener('click', function () {
-      kill(ctx);
+      if (window.confirm("Do you really to kill the doc?\n(it will be destroyed for everyone)")) {
+        kill(ctx);
+      }
     });
 
     document.querySelector('#new').addEventListener('click', function () {
