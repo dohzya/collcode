@@ -46,6 +46,9 @@ header {
   text-align: center;
   cursor: pointer;
 }
+#new:hover {
+  background: #E0E0E0;
+}
 #backdrop {
   z-index: 3;
   display: none;
