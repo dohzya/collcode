@@ -1,18 +1,17 @@
 html { height: 100%; }
 body { position: relative; margin: 0; height: 100%; }
 
-.fullscreen header {
-  display: none;
+.bar {
+  background: #DCDCDC;
+  padding-left: 5px;
 }
-header {
+#cc-options {
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
   z-index: 2;
-  padding-left: 5px;
   height: 23px;
-  background: #cc-DCDCDC;
 }
 #cc-kill {
   margin-left: 200px;
@@ -50,7 +49,7 @@ header {
   cursor: pointer;
 }
 #cc-new:hover {
-  background: #cc-E0E0E0;
+  background: #E0E0E0;
 }
 #cc-backdrop {
   z-index: 3;
@@ -81,7 +80,7 @@ header {
   position: absolute;
   top: 23px;
   right: 0;
-  bottom: 0;
+  bottom: 15px;
   left: 0;
 }
 .preview #cc-editor {
@@ -89,6 +88,14 @@ header {
 }
 #cc-side {
   display: none;
+}
+#cc-statusbar {
+  position: absolute;
+  height: 15px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  font-size: 80%;
 }
 .preview #cc-side {
   display: block;

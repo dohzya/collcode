@@ -10219,6 +10219,43 @@ var Firepad = require('./firepad');
       }
     });
 
+    var statusBar = document.querySelector('#cc-statusbar');
+    var changed = true;
+    var sel = ctx.editor.getSelection();
+    function updateLines(sel) {
+      var mode;
+      var ranges = sel.getAllRanges();
+      var lines;
+      var regions = ranges.length;
+      if (regions > 1) {
+        mode = "region";
+      } else {
+        var range = ranges[0];
+        if (_.isEqual(range.start, range.end)) {
+          mode = "cursor";
+        } else {
+          mode = "selection";
+          lines = range.end.row - range.start.row + 1;
+        }
+      }
+      var cur = ctx.editor.getCursorPosition();
+      var str = _.compact([
+        mode == "cursor" ? "Line " + cur.row : null,
+        mode == "cursor" ? "Column " + cur.column : null,
+        mode == "selection" ? lines + " lines selected" : null,
+        mode == "region" ? regions + " selection regions" : null,
+      ]).join(", ");
+      statusBar.innerHTML = str;
+    }
+    function loopUpdateLines() {
+      updateLines(sel);
+      setTimeout(loopUpdateLines, 100);
+    }
+    loopUpdateLines();
+    sel.on("changeSelection", function () {
+      updateLines(sel);
+    });
+
     window.onbeforeunload = function () {
       if (ctx.creator && !ctx.killed) {
         return "You haven't kill the buffer";
